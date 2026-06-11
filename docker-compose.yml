@@ -1,0 +1,67 @@
+# ============================================================================
+#  Sanal Taktik Saha Ağ Simülatörü — Düğüm Topolojisi (1. Adım)
+#  4 izole düğüm, sabit IP'li özel bir bridge ağı üzerinden haberleşir.
+#  Apple Silicon (arm64) uyumlu: tüm imajlar alpine multi-arch tabanlı.
+# ============================================================================
+
+# Tekrarı önlemek için ortak yapı tanımı (her düğüm bunu miras alır)
+x-node-base: &node-base
+  build:
+    context: ./docker
+    dockerfile: Dockerfile.node
+  restart: unless-stopped
+  # tc/netem ile ileride yapay gecikme/paket kaybı uygulayabilmek için:
+  cap_add:
+    - NET_ADMIN
+  networks:
+    - tactical_net
+
+services:
+  karargah:
+    <<: *node-base
+    container_name: karargah
+    hostname: karargah
+    environment:
+      - NODE_NAME=Karargah
+    networks:
+      tactical_net:
+        ipv4_address: 172.30.0.10
+
+  iha1:
+    <<: *node-base
+    container_name: iha1
+    hostname: iha1
+    environment:
+      - NODE_NAME=İHA-1
+    networks:
+      tactical_net:
+        ipv4_address: 172.30.0.11
+
+  iha2:
+    <<: *node-base
+    container_name: iha2
+    hostname: iha2
+    environment:
+      - NODE_NAME=İHA-2
+    networks:
+      tactical_net:
+        ipv4_address: 172.30.0.12
+
+  tank1:
+    <<: *node-base
+    container_name: tank1
+    hostname: tank1
+    environment:
+      - NODE_NAME=Tank-1
+    networks:
+      tactical_net:
+        ipv4_address: 172.30.0.13
+
+networks:
+  tactical_net:
+    name: tactical_net
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.30.0.0/24
+          gateway: 172.30.0.1

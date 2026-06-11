@@ -1,0 +1,17 @@
+# Taktik Saha Düğümü (Node) imajı
+# alpine resmi imajı multi-arch'tır; Apple Silicon (arm64) üzerinde native çalışır.
+FROM alpine:3.20
+
+# iperf3  -> bant genişliği / jitter / paket kaybı ölçümü
+# iputils -> ping (gecikme/latency ölçümü)
+# iproute2-> tc/netem (ileride yapay gecikme & paket kaybı simülasyonu için)
+# bash    -> entrypoint betiği için
+RUN apk add --no-cache iperf3 iputils iproute2 bash
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# iperf3 sunucu portu
+EXPOSE 5201/tcp 5201/udp
+
+ENTRYPOINT ["/entrypoint.sh"]

@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod +x /Users/enverdoganay/Desktop/Grad-Thesis/scripts/test_connectivity.sh /Users/enverdoganay/Desktop/Grad-Thesis/docker/entrypoint.sh)",
+      "Bash(docker compose *)",
+      "Bash(./scripts/test_connectivity.sh)",
+      "Bash(docker exec *)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); e=d['end']; print\\('JSON OK ->','throughput:',round\\(e['sum_received']['bits_per_second']/1e9,1\\),'Gbit/s |','rtt\\(ms\\):',round\\(e['streams'][0]['sender'].get\\('mean_rtt',0\\)/1000,3\\)\\)\")",
+      "Bash(python3 *)",
+      "Read(//Library/Frameworks/Python.framework/Versions/**)",
+      "Read(//opt/homebrew/bin/**)",
+      "Bash(.venv/bin/pip install *)",
+      "Bash(chmod +x run.sh)",
+      "Bash(.venv/bin/python -c \"import ast; ast.parse\\(open\\('ui/dashboard.py'\\).read\\(\\)\\); print\\('dashboard.py söz dizimi OK'\\)\")",
+      "Bash(.venv/bin/streamlit run *)",
+      "Bash(echo \"Streamlit PID: $!\")",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:8501)",
+      "Bash(curl -s http://localhost:8501/_stcore/health)",
+      "Bash(timeout 35 .venv/bin/python -m backend.engine --no-netem)",
+      "Bash(.venv/bin/python -c \"import json; ts={json.loads\\(l\\)['ts'] for l in open\\('logs/metrics.jsonl'\\)}; print\\(len\\(ts\\),'tur'\\)\")",
+      "Bash(.venv/bin/python -c ' *)"
+    ]
+  }
+}

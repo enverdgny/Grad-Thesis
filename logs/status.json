@@ -1,0 +1,25 @@
+{
+  "updated": "2026-06-11T17:46:50.795416+00:00",
+  "nodes": {
+    "karargah": {
+      "display": "Karargah",
+      "ip": "172.30.0.10",
+      "running": false
+    },
+    "iha1": {
+      "display": "İHA-1",
+      "ip": "172.30.0.11",
+      "running": false
+    },
+    "iha2": {
+      "display": "İHA-2",
+      "ip": "172.30.0.12",
+      "running": false
+    },
+    "tank1": {
+      "display": "Tank-1",
+      "ip": "172.30.0.13",
+      "running": false
+    }
+  }
+}
